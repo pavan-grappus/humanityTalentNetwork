@@ -9,7 +9,7 @@ import resource.EnvironmentDetails;
 
 public class HTN_LoginPage extends BeforeRun {
 
-	String inputFieldDefaultCSSValues = "height: 50px;\r\n" + "    width: 313px;\r\n" + "    padding: 15px 20px;\r\n"
+	static String  inputFieldDefaultCSSValues = "height: 50px;\r\n" + "    width: 313px;\r\n" + "    padding: 15px 20px;\r\n"
 			+ "    padding-top: 15px;\r\n" + "    padding-right: 20px;\r\n" + "    padding-bottom: 15px;\r\n"
 			+ "    padding-left: 20px;\r\n" + "    border-radius: 25px;\r\n" + "    border-top-left-radius: 25px;\r\n"
 			+ "    border-top-right-radius: 25px;\r\n" + "    border-bottom-right-radius: 25px;\r\n"
@@ -444,13 +444,13 @@ public class HTN_LoginPage extends BeforeRun {
 	}
 
 	@Test(enabled = true, priority = 131, dataProviderClass = EnvironmentDetails.class, dataProvider = "InvalidEmailAddress")
-	public void validatingInvalidEmailAddressErrorMessagewithINValidEmails_TDM(String ValidEmailAddress) {
+	public void validatingInvalidEmailAddressErrorMessagewithINValidEmails_TDM(String InValidEmailAddress) {
 		gm.StartTest("validatingInvalidEmailAddressErrorMessagewithINValidEmails_TDM", "");
 		gm.loginfo(
-				"Validating the error message is not Visible when entered the  Email address -> " + ValidEmailAddress);
+				"Validating the error message is not Visible when entered the  Email address -> " + InValidEmailAddress);
 		gm.refresh("LoginPage", 10);
 
-		gm.setText(lp.emailid_input, ValidEmailAddress, "emailid_input");
+		gm.setText(lp.emailid_input, InValidEmailAddress, "emailid_input");
 		gm.verifyElementVisible(lp.invalidEmailAddress_ErrorMessage, "invalidEmailAddress_ErrorMessage");
 		gm.verifyElementText(lp.invalidEmailAddress_ErrorMessage, "Invalid email address",
 				"invalidEmailAddress_ErrorMessage");
@@ -556,12 +556,6 @@ public class HTN_LoginPage extends BeforeRun {
 		gm.EndTest();
 	}
 
-	public void validateModalNotificationMessage(String modalHeader, String modalMesssage) {
-		gm.waitforElementVisible(go.modalHeader, 10, "modalHeader");
-		gm.verifyElementText(go.modalHeader, modalHeader, "modalHeader");
-		gm.verifyElementText(go.modalSubText, modalMesssage, "modalSubText");
-		gm.click(go.modalCloseButton, "modalCloseButton");
-		gm.hold(2);
-	}
+	
 
 }

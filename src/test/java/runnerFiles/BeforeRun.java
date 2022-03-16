@@ -11,6 +11,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import PageObjects.GeneralObjects;
+import PageObjects.Onboarding;
+import PageObjects.addNewUser_Modal;
+import PageObjects.dashboard;
 import PageObjects.logginPage;
 import PageObjects.users;
 import resource.EnvironmentDetails;
@@ -22,6 +25,9 @@ public class BeforeRun {
 	GeneralObjects go = new GeneralObjects();
 	logginPage lp = new logginPage();
 	users us = new users();
+	addNewUser_Modal userModal = new addNewUser_Modal();
+	dashboard dash = new dashboard();
+	Onboarding onboarding = new Onboarding();
 
 	@BeforeSuite(enabled = true)
 	public void readingVariablesfromFile() throws IOException {
@@ -91,5 +97,13 @@ public class BeforeRun {
 			gm.verifyElementCSSValue(path, Key, value, note + " " + Key);
 
 		}
+	}
+	
+	public void validateModalNotificationMessage(String modalHeader, String modalMesssage) {
+		gm.waitforElementVisible(go.modalHeader, 10, "modalHeader");
+		gm.verifyElementText(go.modalHeader, modalHeader, "modalHeader");
+		gm.verifyElementText(go.modalSubText, modalMesssage, "modalSubText");
+		gm.click(go.modalCloseButton, "modalCloseButton");
+		gm.hold(2);
 	}
 }

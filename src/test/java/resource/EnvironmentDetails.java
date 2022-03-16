@@ -63,4 +63,26 @@ public class EnvironmentDetails {
 		return null;
 
 	}
+	
+	
+	@DataProvider(name = "validSearchResultCompanynames")
+	public Iterator<String> validCompanyNames() {
+
+		List<String> array = new ArrayList<String>();
+		ExcelMethods inputdata;
+		try {
+			inputdata = new ExcelMethods(projectDirectory, "\\HH Test cases.xlsx");
+			inputdata.excelinputstreamopen();
+
+			array = inputdata.getDatafromColumn("CompanyNames", 0, true);
+
+			inputdata.excelinputstreamclose();
+
+			return array.iterator();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 }

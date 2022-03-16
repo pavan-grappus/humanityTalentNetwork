@@ -3,9 +3,6 @@ package runnerFiles;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.relevantcodes.extentreports.model.ITest;
-
-import resource.EnvironmentDetails;
 
 public class Test {
 

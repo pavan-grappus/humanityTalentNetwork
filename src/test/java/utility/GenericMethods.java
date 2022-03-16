@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -1353,11 +1354,13 @@ public class GenericMethods {
 
 			for (int i = 0; i < element.size(); i++) {
 				actualarrayText.add(element.get(i).getText().trim());
+				// actualarrayText.add(element.get(i).getAttribute("innerText").trim());
 			}
 
 			boolean Valiator = true;
 			for (String text : actualarrayText) {
 				if (!text.toLowerCase().contains(expectedContainsText.toLowerCase())) {
+					loginfo("The Option in the List Fetched Doesn't contains the Expected Value in ->" + text);
 					Valiator = false;
 					break;
 				}
@@ -1386,6 +1389,55 @@ public class GenericMethods {
 				| NoSuchElementException exctemp) {
 			logger.LogFail(driver, "Failed to Validate if the Expected Text is present in List of Elements : " + Note
 					+ " got the Exception message " + exctemp);
+			return false;
+		}
+
+	}
+
+	public boolean verifyListofElementsContainsinnerText(By path, String expectedContainsText, String Note) {
+
+		try {
+
+			List<WebElement> element = driver.findElements(path);
+
+			List<String> actualarrayText = new ArrayList<String>();
+
+			for (int i = 0; i < element.size(); i++) {
+				actualarrayText.add(element.get(i).getAttribute("innerText").trim());
+			}
+
+			boolean Valiator = true;
+			for (String text : actualarrayText) {
+				if (!text.toLowerCase().contains(expectedContainsText.toLowerCase())) {
+					loginfo("The Option in the List Fetched Doesn't contains the Expected Value in ->" + text);
+					Valiator = false;
+					break;
+				}
+			}
+
+			if (element.size() == 0) {
+				logger.LogWarning(driver, "The Size of the List is Empty in " + Note + "\n Actual Options: "
+						+ actualarrayText + " \n Expected Contains Value: " + expectedContainsText);
+				return false;
+			}
+
+			if (Valiator) {
+				logger.LogPass(driver,
+						"The List of innerText Fetched contains the Expected Value in " + Note + "\n Actual Options: "
+								+ actualarrayText + " \n Expected Contains Value: " + expectedContainsText);
+				return true;
+			} else {
+				logger.LogFail(driver,
+						"The List of innerText Fetched Doesn't contains the Expected Value in " + Note
+								+ "\n Actual Options: " + actualarrayText + " \n Expected Contains Value: "
+								+ expectedContainsText);
+				return false;
+			}
+
+		} catch (ElementNotVisibleException | StaleElementReferenceException | TimeoutException
+				| NoSuchElementException exctemp) {
+			logger.LogFail(driver, "Failed to Validate if the Expected innerText is present in List of Elements : "
+					+ Note + " got the Exception message " + exctemp);
 			return false;
 		}
 
@@ -1435,6 +1487,12 @@ public class GenericMethods {
 			return true;
 		} catch (ElementNotVisibleException | StaleElementReferenceException | TimeoutException
 				| NoSuchElementException e) {
+			logger.LogFail(driver, "Unable to clear the Field " + Note + " in the path got the Exception " + e);
+			return false;
+		} catch (ElementNotInteractableException e) {
+			logger.LogFail(driver, "Unable to clear the Field " + Note + " in the path got the Exception " + e);
+			return false;
+		} catch (Exception e) {
 			logger.LogFail(driver, "Unable to clear the Field " + Note + " in the path got the Exception " + e);
 			return false;
 		}
