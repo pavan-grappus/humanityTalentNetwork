@@ -43,7 +43,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
-public class GenericMethods {
+public class GenericMethods{
 
 	public GenericMethods(String driverpath, String ReportsPath, String ReportName) {
 		this.webdriverPath = driverpath;
@@ -52,7 +52,7 @@ public class GenericMethods {
 	}
 
 	public WebDriver driver;
-	Reports logger;
+	public Reports logger;
 	String webdriverPath;
 	String driveFileName = "";
 
@@ -269,6 +269,19 @@ public class GenericMethods {
 			return false;
 		}
 
+	}
+	
+	public boolean navigateToPage(String URL)
+	{
+		try {
+			
+			logger.LogPass("Navigated to the URL page:"+URL);
+			return true;
+		}
+		catch (Exception e) {
+			logger.LogFail("Unable to naviaget to the URL page:"+URL+" got the Exception"+e.getMessage());
+			return false;
+		}
 	}
 
 	public boolean closeBrowser() {

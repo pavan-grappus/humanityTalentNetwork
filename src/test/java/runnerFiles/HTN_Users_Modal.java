@@ -781,4 +781,17 @@ public class HTN_Users_Modal extends BeforeRun {
 				"companySearchResult");
 		gm.EndTest();
 	}
+
+	@Test(enabled = true, priority = 151)
+	public void sucessfullyInviteANewUser() {
+		gm.StartTest("Sucessfully Add a New User from HTN Admin panel and Validate the Notification message", "");
+		String name = gm.getCurrentTime("ddMMyyyyhhmmss", "GMT");
+		refresh();
+		openAddNewUserModal();
+		gm.setText(userModal.nameInput, name, "nameInput");
+		gm.setText(userModal.emailInput, name + "@grappus.com", "emailInput");
+		selectCompany("Google", 1);
+		gm.click(userModal.confirmButton, "confirmButton");
+		validateModalNotificationMessage("Success", "User invited successfully");
+	}
 }

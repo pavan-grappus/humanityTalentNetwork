@@ -10,30 +10,43 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
+import MobileElements.SetupPassword;
+import MobileElements.SignUpPage;
+import MobileElements.WelcomePage;
+import MobileElements.WelcomeVideo_Mobile;
 import PageObjects.GeneralObjects;
 import PageObjects.Onboarding;
+import PageObjects.WelcomeVideo;
 import PageObjects.addNewUser_Modal;
 import PageObjects.dashboard;
 import PageObjects.logginPage;
 import PageObjects.users;
 import resource.EnvironmentDetails;
 import utility.GenericMethods;
+import utility.MobileMethods;
 
 public class BeforeRun {
 
 	GenericMethods gm;
+	MobileMethods mobile;
 	GeneralObjects go = new GeneralObjects();
 	logginPage lp = new logginPage();
 	users us = new users();
 	addNewUser_Modal userModal = new addNewUser_Modal();
 	dashboard dash = new dashboard();
 	Onboarding onboarding = new Onboarding();
+	WelcomeVideo welcomeVideo = new WelcomeVideo();
+	WelcomePage mobileWelcomePage = new WelcomePage();
+	SignUpPage mobileSignUpPage = new SignUpPage();
+	SetupPassword passwordPage = new SetupPassword();
+	WelcomeVideo_Mobile welcomeVideoMobile = new WelcomeVideo_Mobile();
 
 	@BeforeSuite(enabled = true)
 	public void readingVariablesfromFile() throws IOException {
 
 		gm = new GenericMethods(EnvironmentDetails.projectDirectory + "\\Driver\\",
 				EnvironmentDetails.projectDirectory + "\\Reports\\", "HTN_");
+		mobile = new MobileMethods(gm.logger);
 
 	}
 
@@ -44,6 +57,11 @@ public class BeforeRun {
 		} catch (Exception e) {
 		}
 		gm.OpenBrowser(EnvironmentDetails.htnURL, "chromeinsecurecontent");
+	}
+
+	public void launchApplication() {
+
+		mobile.launchApplication();
 	}
 
 	@BeforeTest(enabled = true)
@@ -98,7 +116,32 @@ public class BeforeRun {
 
 		}
 	}
-	
+
+	public void signUpWithEmail(String emailAddress) {
+		mobile.click(mobileWelcomePage.getStarted, "getStarted");
+
+		mobile.setText(mobileSignUpPage.enterYourEmail, emailAddress, "enterYourEmail");
+
+		mobile.click(mobileSignUpPage.getStarted, "getStarted");
+
+		mobile.setText(passwordPage.createAPassword, "Test@123", "createAPassword");
+
+		mobile.click(passwordPage.saveAndContinue, "saveAndContinue");
+
+		mobile.click(welcomeVideoMobile.getStarted_button, "getStarted_button");
+
+		mobile.click(welcomeVideoMobile.iPledge_button, "iPledge_button");
+
+	}
+
+	public void userLoginToTheWebApplication(String emailString, String passwordString) {
+		gm.setText(lp.emailid_input, emailString, "emailid_input");
+		gm.setText(lp.password_input, passwordString, "password_input");
+		gm.click(lp.Continue_button, "Continue_button");
+		gm.waitforElementVisible(us.addNewUser_button, 10, "addNewUser_button");
+		gm.hold(5);
+	}
+
 	public void validateModalNotificationMessage(String modalHeader, String modalMesssage) {
 		gm.waitforElementVisible(go.modalHeader, 10, "modalHeader");
 		gm.verifyElementText(go.modalHeader, modalHeader, "modalHeader");
@@ -106,4 +149,9 @@ public class BeforeRun {
 		gm.click(go.modalCloseButton, "modalCloseButton");
 		gm.hold(2);
 	}
+
+	public int getInvitedPercentage(int members, int invited) {
+		return Math.round(members * 100f / invited);
+	}
+
 }

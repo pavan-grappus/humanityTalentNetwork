@@ -17,6 +17,11 @@ public class EnvironmentDetails {
 	
 	public static String SuperAdminPassword = "Test@123";
 
+	public static String AdminUserName = "pavan+205@grappus.com";
+	
+	public static String AdminPassword = "Test@123";
+
+	
 	public static String projectDirectory = System.getProperty("user.dir");
 
 	public static String uploadFilesRootPath = System.getProperty("user.dir") + "\\" + "UploadFiles" + "\\";

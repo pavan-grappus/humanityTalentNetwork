@@ -1,5 +1,9 @@
 package runnerFiles;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -8,6 +12,7 @@ public class Test {
 
 	public static void main(String[] args) {
 
+	/*
 		ExtentReports ex = new ExtentReports("E:\\eclipseWorkSpace\\testJava\\target\\Spark\\spark.html", true);
 
 		ExtentTest test = ex.startTest("Test1", "");
@@ -28,7 +33,13 @@ public class Test {
 		test.appendChild(testchild3);
 
 		ex.flush();
-
+*/
+		
+		String a = "110.12";
+		int b = 424;
+		float percent = Float.valueOf(a);
+		
+		System.out.println(percent);
 	}
 
 }
