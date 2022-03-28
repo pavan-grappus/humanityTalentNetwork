@@ -43,7 +43,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
-public class GenericMethods{
+public class GenericMethods {
 
 	public GenericMethods(String driverpath, String ReportsPath, String ReportName) {
 		this.webdriverPath = driverpath;
@@ -270,16 +270,15 @@ public class GenericMethods{
 		}
 
 	}
-	
-	public boolean navigateToPage(String URL)
-	{
+
+	public boolean navigateToPage(String URL) {
 		try {
-			
-			logger.LogPass("Navigated to the URL page:"+URL);
+
+			driver.navigate().to(URL);
+			logger.LogPass(driver, "Navigated to the URL page:" + URL);
 			return true;
-		}
-		catch (Exception e) {
-			logger.LogFail("Unable to naviaget to the URL page:"+URL+" got the Exception"+e.getMessage());
+		} catch (Exception e) {
+			logger.LogFail(driver, "Unable to naviaget to the URL page:" + URL + " got the Exception" + e.getMessage());
 			return false;
 		}
 	}
