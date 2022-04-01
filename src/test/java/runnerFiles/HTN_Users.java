@@ -57,20 +57,20 @@ public class HTN_Users extends BeforeRun {
 
 	public void navigateToUserPage() {
 
-		gm.navigateToPage(EnvironmentDetails.htnURL);
+		gm.navigateToPage(EnvironmentDetails.htnURL + "/dashboard/users");
 		gm.hold(5);
 	}
 
 	public void navigateToVideoPage_desktopView(String emailAddress) {
 
-		String url = "https://video-dev.humanitytalent.net/desktopView.html?email=" + emailAddress;
+		String url = EnvironmentDetails.htnURL + "/desktopView.html?email=" + emailAddress;
 		gm.navigateToPage(url);
 		gm.hold(5);
 	}
 
 	public void navigateToVideoPage_mobileView(String emailAddress) {
 
-		gm.navigateToPage("https://video-dev.humanitytalent.net/mobileView.html?email=" + emailAddress);
+		gm.navigateToPage(EnvironmentDetails.htnURL + "/mobileView.html?email=" + emailAddress);
 		gm.hold(5);
 	}
 
@@ -90,6 +90,16 @@ public class HTN_Users extends BeforeRun {
 		gm.click(userModal.confirmButton, "confirmButton");
 		validateModalNotificationMessage("Success", "User invited successfully");
 		return emailAddress;
+	}
+
+	@Test(priority = 0, enabled = true)
+	public void generalValidationOfUserPage() {
+
+		gm.StartTest("By default After login User should be landed in Users page", "");
+		validateWebpageTabIconAndTitle();
+		gm.verifyPageURL(EnvironmentDetails.htnURL + "/dashboard/users");
+		gm.EndTest();
+
 	}
 
 	@Test(priority = 1, enabled = true)

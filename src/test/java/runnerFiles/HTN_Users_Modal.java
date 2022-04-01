@@ -416,7 +416,27 @@ public class HTN_Users_Modal extends BeforeRun {
 
 	{
 
-		//// Test 1
+		gm.StartTest("Add New User Confirm button CSS validation in disabled state", "");
+		refresh();
+		openAddNewUserModal();
+		gm.verifyElementisNOTClickable(userModal.confirmButton, "confirmButton");
+		gm.verifyElementCSSValue(userModal.confirmButton, "background-color", "rgba(204, 204, 204, 1)",
+				"confirmButton");
+		gm.verifyElementCSSValue(userModal.confirmButton, "color", "rgba(102, 102, 102, 1)", "confirmButton");
+		gm.EndTest();
+
+		gm.StartTest("Add New User Confirm button CSS validation in Enabled state", "");
+		refresh();
+		openAddNewUserModal();
+		gm.setText(userModal.nameInput, "TestName", "nameInput");
+		gm.setText(userModal.emailInput, gm.getCurrentTime("ddMMyyyyhhmmss", "GMT") + "@grappus.com", "emailInput");
+		selectCompany("Google", 1);
+		gm.verifyElementClickable(userModal.confirmButton, "confirmButton");
+		gm.verifyElementCSSValue(userModal.confirmButton, "background-color", "rgba(181, 248, 93, 1)", "confirmButton");
+		gm.verifyElementCSSValue(userModal.confirmButton, "color", "rgba(8, 42, 88, 1)", "confirmButton");
+		gm.EndTest();
+
+		//// Test 3
 		gm.StartTest("Add New User Confirm button should be in disabled state by default", "");
 		refresh();
 		openAddNewUserModal();
@@ -426,7 +446,7 @@ public class HTN_Users_Modal extends BeforeRun {
 		gm.verifyElementCSSValue(userModal.confirmButton, "color", "rgba(102, 102, 102, 1)", "confirmButton");
 		gm.EndTest();
 
-		/// Test 2
+		/// Test 4
 
 		gm.StartTest("Add new User confirm button should not be enabled if only UserName is filled", "");
 		refresh();
@@ -561,6 +581,12 @@ public class HTN_Users_Modal extends BeforeRun {
 		gm.verifyElementAttributeValue(userModal.nameInput, "value", "", "nameInput");
 		gm.verifyElementAttributeValue(userModal.emailInput, "value", "", "emailInput");
 		gm.verifyElementAttributeValue(userModal.companyInput, "value", "", "companyInput");
+		gm.EndTest();
+
+		gm.StartTest(
+				"After Not Sucessfully Adding New User the field values should be empty after Inviting and upon reopen the Add New User Modal ",
+				"");
+		gm.logSkip("This need to be handeled manulayy");
 		gm.EndTest();
 
 	}

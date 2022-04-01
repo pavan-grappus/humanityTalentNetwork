@@ -594,6 +594,29 @@ public class GenericMethods {
 
 	}
 
+	public boolean verifyPageURL(String expectedURL) {
+
+		String actualURL;
+		try {
+			actualURL = driver.getCurrentUrl();
+
+			if (Objects.equals(actualURL, expectedURL)) {
+				logger.LogPass(driver, "Page URL is matching and is Equal \n Actual URL: " + actualURL
+						+ "\nExpected URL : " + expectedURL);
+				return true;
+			} else {
+
+				logger.LogFail(driver, "Page URL is NOT Matching and is NOT Equal \n  Actual URL: " + actualURL
+						+ "\nExpected URL : " + expectedURL);
+				return false;
+			}
+		} catch (Exception e) {
+			logger.LogFail(driver, "Unable to verify the Page URL got the Exception message " + e.toString());
+			return false;
+		}
+
+	}
+
 	public String getAttributeValue(By path, String attribute, String Note) {
 		String actualText;
 		try {
@@ -976,8 +999,7 @@ public class GenericMethods {
 			}
 
 		} catch (Exception exctemp) {
-			logger.LogFail(driver,
-					"Failed to Click on the Element : " + Note + " got the Exception message " + exctemp);
+			logger.LogFail(driver, "Failed to validate the Text : " + Note + " got the Exception message " + exctemp);
 			return false;
 		}
 

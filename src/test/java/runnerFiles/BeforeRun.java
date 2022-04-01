@@ -154,4 +154,30 @@ public class BeforeRun {
 		return Math.round(members * 100f / invited);
 	}
 
+	public void validateWebpageTabIconAndTitle() {
+		gm.verifyElementAttributeValue_NotDisplayed(go.TabIcon, "href",
+				"https://admin-dev.humanitytalent.net/favicon.ico", "TabIcon");
+		gm.verifyPageTitle("Humanity Health Admin");
+	}
+
+	public void validateCSSProperty(By object, String ObjectText, String fontfamily, String fontsize,
+			String letterSpacing, String opacity, String color, String backgroundColor, String textAllign) {
+		gm.verifyElementCSSValue(object, "font-family", fontfamily, ObjectText);
+		gm.verifyElementCSSValue(object, "font-size", fontsize, ObjectText);
+		gm.verifyElementCSSValue(object, "letter-spacing", letterSpacing, ObjectText);
+		gm.verifyElementCSSValue(object, "opacity", opacity, ObjectText);
+		gm.verifyElementCSSValue(object, "color", color, ObjectText);
+		gm.verifyElementCSSValue(object, "background-color", backgroundColor, "");
+		gm.verifyElementCSSValue(object, "text-align", textAllign, ObjectText);
+
+	}
+
+	public void validateTextFieldPropertys(By Object, String objectName, String FieldType, String placeholder,
+			String value) {
+		gm.verifyElementAttributeValue(Object, "type", FieldType, objectName);
+		gm.verifyElementAttributeValue(Object, "placeholder", placeholder, objectName);
+		gm.verifyElementAttributeValue(Object, "value", value, objectName);
+
+	}
+
 }

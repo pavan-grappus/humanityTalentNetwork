@@ -11,7 +11,7 @@ import utility.ExcelMethods;
 
 public class EnvironmentDetails {
 
-	public static String htnURL = "https://admin-dev.humanitytalent.net/";
+	public static String htnURL = "https://admin-dev.humanitytalent.net";
 	
 	public static String SuperAdminUserName = "admin_ankit_dev@grappus.com";
 	

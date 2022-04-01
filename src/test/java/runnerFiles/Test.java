@@ -1,8 +1,15 @@
 package runnerFiles;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -10,7 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException {
 
 	/*
 		ExtentReports ex = new ExtentReports("E:\\eclipseWorkSpace\\testJava\\target\\Spark\\spark.html", true);
@@ -35,11 +42,7 @@ public class Test {
 		ex.flush();
 */
 		
-		String a = "110.12";
-		int b = 424;
-		float percent = Float.valueOf(a);
 		
-		System.out.println(percent);
 	}
 
 }

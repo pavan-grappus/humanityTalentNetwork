@@ -44,6 +44,7 @@ public class MobileMethods {
 			URL url = new URL("http://127.0.0.1:4723/wd/hub");
 
 			this.mobileDriver = new AppiumDriver<MobileElement>(url, cap);
+			mobileDriver.resetApp();
 			logger.LogPass("Launched the Mobile Application Successfully");
 		} catch (Exception e) {
 			logger.LogFail("Unable to launch the Application got the error " + e.getMessage());

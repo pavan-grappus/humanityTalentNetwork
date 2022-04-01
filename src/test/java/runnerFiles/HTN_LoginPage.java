@@ -9,13 +9,13 @@ import resource.EnvironmentDetails;
 
 public class HTN_LoginPage extends BeforeRun {
 
-	static String  inputFieldDefaultCSSValues = "height: 50px;\r\n" + "    width: 313px;\r\n" + "    padding: 15px 20px;\r\n"
-			+ "    padding-top: 15px;\r\n" + "    padding-right: 20px;\r\n" + "    padding-bottom: 15px;\r\n"
-			+ "    padding-left: 20px;\r\n" + "    border-radius: 25px;\r\n" + "    border-top-left-radius: 25px;\r\n"
-			+ "    border-top-right-radius: 25px;\r\n" + "    border-bottom-right-radius: 25px;\r\n"
-			+ "    border-bottom-left-radius: 25px;\r\n" + "    background-color: rgba(242, 243, 244, 1);\r\n"
-			+ "    font-family: Inter;\r\n" + "    font-size: 16px;\r\n" + "    line-height: 20px;\r\n"
-			+ "    letter-spacing: -0.1px;";
+	static String inputFieldDefaultCSSValues = "height: 50px;\r\n" + "    width: 313px;\r\n"
+			+ "    padding: 15px 20px;\r\n" + "    padding-top: 15px;\r\n" + "    padding-right: 20px;\r\n"
+			+ "    padding-bottom: 15px;\r\n" + "    padding-left: 20px;\r\n" + "    border-radius: 25px;\r\n"
+			+ "    border-top-left-radius: 25px;\r\n" + "    border-top-right-radius: 25px;\r\n"
+			+ "    border-bottom-right-radius: 25px;\r\n" + "    border-bottom-left-radius: 25px;\r\n"
+			+ "    background-color: rgba(242, 243, 244, 1);\r\n" + "    font-family: Inter;\r\n"
+			+ "    font-size: 16px;\r\n" + "    line-height: 20px;\r\n" + "    letter-spacing: -0.1px;";
 
 	String buttonDefaultCSSValues = "		 width: 315px;\r\n" + "	    height: 50px;\r\n"
 			+ "	    padding-top: 17px;\r\n" + "	    padding-right: 132px;\r\n" + "	    padding-bottom: 17px;\r\n"
@@ -47,6 +47,8 @@ public class HTN_LoginPage extends BeforeRun {
 				"https://admin-dev.humanitytalent.net/favicon.ico", "TabIcon");
 
 		gm.verifyPageTitle("Humanity Health Admin");
+
+		gm.verifyPageURL(EnvironmentDetails.htnURL);
 
 		gm.EndTest();
 	}
@@ -113,7 +115,7 @@ public class HTN_LoginPage extends BeforeRun {
 		gm.EndTest();
 	}
 
-	@Test(enabled = true,priority = 51)
+	@Test(enabled = true, priority = 51)
 	public void validateTheEmailLablel() {
 		gm.StartTest("Email TextBox Label", "");
 
@@ -446,8 +448,8 @@ public class HTN_LoginPage extends BeforeRun {
 	@Test(enabled = true, priority = 131, dataProviderClass = EnvironmentDetails.class, dataProvider = "InvalidEmailAddress")
 	public void validatingInvalidEmailAddressErrorMessagewithINValidEmails_TDM(String InValidEmailAddress) {
 		gm.StartTest("validatingInvalidEmailAddressErrorMessagewithINValidEmails_TDM", "");
-		gm.loginfo(
-				"Validating the error message is not Visible when entered the  Email address -> " + InValidEmailAddress);
+		gm.loginfo("Validating the error message is not Visible when entered the  Email address -> "
+				+ InValidEmailAddress);
 		gm.refresh("LoginPage", 10);
 
 		gm.setText(lp.emailid_input, InValidEmailAddress, "emailid_input");
@@ -555,7 +557,5 @@ public class HTN_LoginPage extends BeforeRun {
 
 		gm.EndTest();
 	}
-
-	
 
 }
